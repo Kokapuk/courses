@@ -1,0 +1,1 @@
+### `ui` folder contains reusable primitive components and Chakra UI automatically generated snippets
