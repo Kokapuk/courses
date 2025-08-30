@@ -27,7 +27,7 @@ export const coursesSlice = createSlice({
     addPurchasedCourse: (state, action: PayloadAction<Course>) => {
       state.purchasedCoursesIds.push(action.payload.id);
     },
-    resetPurchasedCourse: (state) => {
+    resetPurchasedCourses: (state) => {
       state.purchasedCoursesIds = [];
     },
     setVideoModalOpen: (state, action: PayloadAction<boolean>) => {
@@ -48,7 +48,7 @@ export const coursesSlice = createSlice({
 export const {
   setCourses,
   addPurchasedCourse,
-  resetPurchasedCourse,
+  resetPurchasedCourses,
   setVideoModalOpen,
   setVideoCourseId,
   saveVideoPosition,

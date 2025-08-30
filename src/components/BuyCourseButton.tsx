@@ -35,9 +35,7 @@ export default function BuyCourseButton({
       console.error(err);
 
       if (err instanceof Error) {
-        if (err instanceof Error) {
-          toaster.create({ title: 'Error', description: err.message, closable: true, type: 'error' });
-        }
+        toaster.create({ title: 'Error', description: err.message, closable: true, type: 'error' });
       }
     } finally {
       setLoading(false);

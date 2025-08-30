@@ -1,5 +1,5 @@
 import { setAuthenticatedAs } from '@/app/features/auth/authSlice';
-import { resetPurchasedCourse, resetSavedVideosPositions } from '@/app/features/courses/coursesSlice';
+import { resetPurchasedCourses, resetSavedVideosPositions } from '@/app/features/courses/coursesSlice';
 import type { RootState } from '@/app/store';
 import { Avatar, Menu, Portal, type MenuTriggerProps } from '@chakra-ui/react';
 import type { RefAttributes } from 'react';
@@ -15,7 +15,7 @@ export default function UserMenu(props: MenuTriggerProps & RefAttributes<HTMLBut
 
   const logout = () => {
     dispatch(setAuthenticatedAs(null));
-    dispatch(resetPurchasedCourse());
+    dispatch(resetPurchasedCourses());
     dispatch(resetSavedVideosPositions());
   };
 

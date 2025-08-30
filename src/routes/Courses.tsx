@@ -17,7 +17,7 @@ export default function Courses() {
 
   return (
     <>
-      <CourseList courses={courses} />
+      <CourseList />
       <VideoModal />
     </>
   );
