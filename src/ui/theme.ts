@@ -4,17 +4,18 @@ const config = defineConfig({
   globalCss: {
     ':root': {
       colorPalette: 'blue',
+      scrollbarColor: 'var(--chakra-colors-bg-emphasized) var(--chakra-colors-bg)',
       '--page-width': {
         base: '100%',
-        md: '50rem',
+        lg: '50rem',
       },
       '--page-padding': {
         base: '1.25rem',
-        md: '0',
+        lg: '0',
       },
     },
     main: {
-      paddingTop: '12',
+      paddingBlock: '12',
       width: 'var(--page-width)',
       paddingInline: 'var(--page-padding)',
       marginInline: 'auto',

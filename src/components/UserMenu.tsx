@@ -1,12 +1,11 @@
 import { setAuthenticatedAs } from '@/app/features/auth/authSlice';
+import { resetPurchasedCourse, resetSavedVideosPositions } from '@/app/features/courses/coursesSlice';
 import type { RootState } from '@/app/store';
 import { Avatar, Menu, Portal, type MenuTriggerProps } from '@chakra-ui/react';
 import type { RefAttributes } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export type UserMenuProps = MenuTriggerProps & RefAttributes<HTMLButtonElement>;
-
-export default function UserMenu(props: UserMenuProps) {
+export default function UserMenu(props: MenuTriggerProps & RefAttributes<HTMLButtonElement>) {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -16,6 +15,8 @@ export default function UserMenu(props: UserMenuProps) {
 
   const logout = () => {
     dispatch(setAuthenticatedAs(null));
+    dispatch(resetPurchasedCourse());
+    dispatch(resetSavedVideosPositions());
   };
 
   const handleSelect = (value: string) => {
@@ -27,7 +28,7 @@ export default function UserMenu(props: UserMenuProps) {
   };
 
   return (
-    <Menu.Root positioning={{ placement: 'right-end' }} onSelect={(e) => handleSelect(e.value)}>
+    <Menu.Root positioning={{ placement: 'right-end' }} unmountOnExit onSelect={(e) => handleSelect(e.value)}>
       <Menu.Trigger rounded="full" focusRing="outside" cursor="pointer" {...props}>
         <Avatar.Root>
           <Avatar.Fallback name={user.email} />

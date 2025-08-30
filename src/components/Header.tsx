@@ -10,7 +10,16 @@ export default function Header(props: CardRootProps & RefAttributes<HTMLDivEleme
   const authenticated = useSelector((state: RootState) => !!state.auth.user);
 
   return (
-    <Card.Root as="header" height="16" borderRadius="0" borderWidth="0 0 1px 0" {...props}>
+    <Card.Root
+      as="header"
+      height="16"
+      borderRadius="0"
+      borderWidth="0 0 1px 0"
+      position="sticky"
+      top="0"
+      zIndex="1"
+      {...props}
+    >
       <Card.Body
         flexDirection="row"
         alignItems="center"

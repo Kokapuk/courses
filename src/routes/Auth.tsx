@@ -16,7 +16,7 @@ export default function Auth() {
   const [formIssues, setFormIssues] = useState<StructuredZodIssues>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const authenticated = useSelector((state: RootState) => !!state.auth.user);
 
   if (authenticated) {
@@ -29,28 +29,24 @@ export default function Auth() {
     try {
       const formData = userSchema.parse(Object.fromEntries(new FormData(event.currentTarget).entries()));
 
-      try {
-        setLoading(true);
+      setLoading(true);
 
-        const user = await authenticate(formData);
-        dispatch(setAuthenticatedAs(user));
-
-        navigate('/');
-
-        toaster.create({ title: 'Success', description: 'Successfully logged in', closable: true, type: 'success' });
-      } catch (err) {
+      const user = await authenticate(formData);
+      dispatch(setAuthenticatedAs(user));
+      navigate('/');
+      toaster.create({ title: 'Success', description: 'Successfully logged in', closable: true, type: 'success' });
+    } catch (err: unknown) {
+      if (err instanceof z.ZodError) {
+        setFormIssues(structureZodIssues(err));
+      } else {
         console.error(err);
 
         if (err instanceof Error) {
           toaster.create({ title: 'Error', description: err.message, closable: true, type: 'error' });
         }
-      } finally {
-        setLoading(false);
       }
-    } catch (err: unknown) {
-      if (err instanceof z.ZodError) {
-        setFormIssues(structureZodIssues(err));
-      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,7 +76,7 @@ export default function Auth() {
           </Stack>
         </Card.Body>
         <Card.Footer justifyContent="flex-end">
-          <Button type="submit" loading={loading}>
+          <Button type="submit" loading={isLoading}>
             Log in
           </Button>
         </Card.Footer>
